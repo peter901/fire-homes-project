@@ -4,6 +4,7 @@ import "./globals.css";
 import Link from "next/link";
 import { AuthProvider } from "@/context/auth";
 import AuthButtons from "@/components/AuthButtons";
+import { HomeIcon } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,8 +33,11 @@ export default function RootLayout({
       >
         <AuthProvider>
           <nav className="bg-sky-950 text-white p-5 h-24 flex items-center justify-between">
-            <Link href="/">
-              Fire homes
+            <Link href="/" className="text-3xl tracking-widest flex gap-2 items-center">
+            <HomeIcon/>
+              <span>
+                Fire homes
+              </span>
             </Link>
             <ul>
               <li>
