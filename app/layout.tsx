@@ -34,7 +34,7 @@ export default function RootLayout({
           </Link>
           <ul>
             <li>
-              <Link href="/login">Signin</Link>
+              <Link href="/login">Login</Link>
             </li>
             <li>
               <Link href="/signup">Signup</Link>
