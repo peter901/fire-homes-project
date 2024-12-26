@@ -22,8 +22,18 @@ export default function AuthButtons(){
 
             {!auth?.currentUser &&
                 <div className="flex gap-2 items-center">
-                    <Link href="/login" className="uppercase tracking-widest hover:underline">Login</Link>
-                    <Link href="/signup" className="uppercase tracking-widest hover:underline">Signup</Link>
+                    <Link 
+                        href="/login" 
+                        className="uppercase tracking-widest hover:underline"
+                    >
+                        Login
+                    </Link>
+                    <Link 
+                        href="/signup" 
+                        className="uppercase tracking-widest hover:underline"
+                    >
+                        Signup
+                    </Link>
                 </div>
             }
         </div>
