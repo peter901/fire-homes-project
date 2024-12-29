@@ -2,6 +2,9 @@
 
 import { useAuth } from "@/context/auth"
 import Link from 'next/link'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { Avatar, AvatarFallback } from "./ui/avatar";
+import Image from "next/image";
 
 export default function AuthButtons(){
     const auth = useAuth();
@@ -9,15 +12,38 @@ export default function AuthButtons(){
     return (
         <div>
             {!!auth?.currentUser && (
-                <>
-                    <div>{auth.currentUser.email}</div>
-                    <div onClick={() =>{
-                            auth.logout()
-                        }}
-                    >
-                        Logout
-                    </div>
-                </>
+                <DropdownMenu>
+                    <DropdownMenuTrigger>
+                        <Avatar>
+                            { !!auth.currentUser.photoURL && (
+                                <Image 
+                                    src={auth.currentUser.photoURL} 
+                                    alt={`${auth.currentUser.displayName}`}
+                                    width={62}
+                                    height={62}
+                                    />
+                                )
+                            }
+                            <AvatarFallback>
+                                {(auth.currentUser.displayName || auth.currentUser.email)?.[0]}
+                            </AvatarFallback>
+                        </Avatar>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuLabel>
+                            <div></div>
+                        </DropdownMenuLabel>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+                // <>
+                //     <div>{auth.currentUser.email}</div>
+                //     <div onClick={() =>{
+                //             auth.logout()
+                //         }}
+                //     >
+                //         Logout
+                //     </div>
+                // </>
             )}
 
             {!auth?.currentUser &&
