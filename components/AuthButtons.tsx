@@ -31,7 +31,12 @@ export default function AuthButtons(){
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                         <DropdownMenuLabel>
-                            <div></div>
+                            <div>{auth.currentUser.displayName}</div>
+                            <div className="font-normal text-xs">{auth.currentUser.email}</div>
+                        </DropdownMenuLabel>
+                        <DropdownMenuLabel>
+                            <div>{auth.currentUser.displayName}</div>
+                            <div>{auth.currentUser.email}</div>
                         </DropdownMenuLabel>
                     </DropdownMenuContent>
                 </DropdownMenu>
