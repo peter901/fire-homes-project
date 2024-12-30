@@ -3,6 +3,12 @@
 import { auth } from "@/firebase/server";
 import { cookies } from "next/headers";
 
+export const removeToken = async() =>{
+    const cockieStore = await cookies();
+    cockieStore.delete("firebaseAuthToken");
+    cockieStore.delete("firebaseAuthRefreshToken");
+}
+
 export const setToken = async ({
     token,
     refreshToken

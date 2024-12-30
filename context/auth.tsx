@@ -3,7 +3,7 @@
 import { auth } from "@/firebase/client";
 import { User,GoogleAuthProvider, signInWithPopup, ParsedToken } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
-import { setToken } from "./actions";
+import { removeToken, setToken } from "./actions";
 
 type AuthContextType = {
     currentUser: User | null;
@@ -39,6 +39,8 @@ export const AuthProvider = ({children}: {
                     });
                 }
 
+            } else{
+                await removeToken();
             }
         })
 
