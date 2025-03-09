@@ -1,12 +1,8 @@
 "use client";
 
 import { auth } from "@/firebase/client";
-import {
-  User,
-  GoogleAuthProvider,
-  signInWithPopup,
-  ParsedToken,
-} from "firebase/auth";
+import type { User, ParsedToken } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 import { removeToken, setToken } from "./actions";
 
