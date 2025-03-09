@@ -1,6 +1,12 @@
 "use client";
-import { propertyDataSchema } from "@/validation/propertySchema";
+import PropertyForm from "@/components/ui/propertyForm";
+
 
 export default function NewPropertyForm() {
-  return <>New Property form</>;
+    
+  return (
+    <div>
+      <PropertyForm />
+    </div>
+  );
 }
