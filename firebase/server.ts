@@ -1,7 +1,10 @@
-import { Firestore, getFirestore } from "firebase-admin/firestore";
-import { getApps, ServiceAccount } from "firebase-admin/app";
+import type { Firestore } from "firebase-admin/firestore";
+import { getFirestore } from "firebase-admin/firestore";
+import { getApps } from "firebase-admin/app";
+import type { ServiceAccount } from "firebase-admin/app";
 import admin from "firebase-admin";
-import { Auth, getAuth } from "firebase-admin/auth";
+import type { Auth } from "firebase-admin/auth";
+import { getAuth } from "firebase-admin/auth";
 
 const serviceAccount = {
   type: "service_account",
