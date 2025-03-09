@@ -1,10 +1,6 @@
-"use client"
-import { propertyDataSchema } from "@/validation/propertySchema"
+"use client";
+import { propertyDataSchema } from "@/validation/propertySchema";
 
-export default function  NewPropertyForm(){
-    return (
-        <>
-            New Property form
-        </>
-    )
+export default function NewPropertyForm() {
+  return <>New Property form</>;
 }
