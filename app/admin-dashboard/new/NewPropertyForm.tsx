@@ -5,7 +5,9 @@ import type { propertyDataSchema } from "@/validation/propertySchema";
 import { PlusCircleIcon } from "lucide-react";
 
 export default function NewPropertyForm() {
-  const handleSubmit = async (data: zodInfer<typeof propertyDataSchema>) => {};
+  const handleSubmit = async (data: zodInfer<typeof propertyDataSchema>) => {
+    console.log(data)
+  };
   return (
     <div>
       <PropertyForm
