@@ -123,7 +123,7 @@ export default function PropertyForm({
                 <FormItem>
                   <FormLabel>Postcode</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input {...field} value="GU16 7HF" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
