@@ -6,7 +6,7 @@ import { PlusCircleIcon } from "lucide-react";
 import { useAuth } from "@/context/auth";
 import { saveNewProperty } from "./actions";
 import { toast } from "sonner";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function NewPropertyForm() {
   const auth = useAuth();
@@ -20,7 +20,7 @@ export default function NewPropertyForm() {
     }
     const response = await saveNewProperty({ ...data, token });
 
-    if (!response.error) {
+    if (response.error) {
       toast("Error!", { description: response.message });
       return;
     }
