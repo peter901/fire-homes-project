@@ -17,9 +17,10 @@ export default function NewPropertyForm() {
       return;
     }
     const response = await saveNewProperty({ ...data, token });
-    
+
     if (!response.error) {
       toast("Error!", { description: response.message });
+      return;
     }
 
     if (!response.error) {
