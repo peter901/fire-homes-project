@@ -21,12 +21,17 @@ import {
 } from "./select";
 import { Input } from "./input";
 import { Textarea } from "./textarea";
+import { Button } from "./button";
 
 type Props = {
+  submitButtonLabel: React.ReactNode;
   handleSubmit: (data: zodInfer<typeof propertyDataSchema>) => void;
 };
 
-export default function PropertyForm({ handleSubmit }: Props) {
+export default function PropertyForm({
+  handleSubmit,
+  submitButtonLabel,
+}: Props) {
   const form = useForm<zodInfer<typeof propertyDataSchema>>({
     resolver: zodResolver(propertyDataSchema),
     defaultValues: {
@@ -110,6 +115,19 @@ export default function PropertyForm({ handleSubmit }: Props) {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="postcode"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Postcode</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </fieldset>
           <fieldset className="flex flex-col gap-2">
             <FormField
@@ -166,6 +184,12 @@ export default function PropertyForm({ handleSubmit }: Props) {
             />
           </fieldset>
         </div>
+        <Button
+          type="submit"
+          className="max-w-md mx-auto mt-2 w-full flex gap-2"
+        >
+          {submitButtonLabel}
+        </Button>
       </form>
     </Form>
   );
