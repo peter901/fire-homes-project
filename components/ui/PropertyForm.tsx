@@ -158,7 +158,7 @@ export default function PropertyForm({ handleSubmit }: Props) {
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Textarea {...field} />
+                    <Textarea {...field} rows={5} className="resize-none" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
