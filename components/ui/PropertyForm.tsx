@@ -41,6 +41,7 @@ export default function PropertyForm({
       postcode: "",
       price: 0,
       bedrooms: 0,
+      bathrooms: 0,
       status: "draft",
       description: "",
     },
