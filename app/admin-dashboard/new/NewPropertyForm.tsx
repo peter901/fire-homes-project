@@ -5,6 +5,7 @@ import type { propertyDataSchema } from "@/validation/propertySchema";
 import { PlusCircleIcon } from "lucide-react";
 import { useAuth } from "@/context/auth";
 import { saveNewProperty } from "./actions";
+import { toast } from "sonner";
 
 export default function NewPropertyForm() {
   const auth = useAuth();
@@ -16,6 +17,10 @@ export default function NewPropertyForm() {
       return;
     }
     const response = await saveNewProperty({...data, token});
+
+    if(!response.error){
+      toast("New Property Created")
+    }
 
     console.log(response);
   };
