@@ -20,6 +20,7 @@ import {
   SelectValue,
 } from "./select";
 import { Input } from "./input";
+import { Textarea } from "./textarea";
 
 type Props = {
   handleSubmit: (data: zodInfer<typeof propertyDataSchema>) => void;
@@ -145,6 +146,19 @@ export default function PropertyForm({ handleSubmit }: Props) {
                   <FormLabel>Bathrooms</FormLabel>
                   <FormControl>
                     <Input {...field} type="number" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Textarea {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
