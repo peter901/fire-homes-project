@@ -34,7 +34,7 @@ export default function PropertyForm({
   handleSubmit,
   defaultValues,
 }: Props) {
-  const combinedDefaultValues = {
+  const combinedDefaultValues: zodInfer<typeof propertyDataSchema> = {
     ...{
       address1: "",
       address2: "",
