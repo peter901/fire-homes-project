@@ -29,7 +29,18 @@ export default async function EditProperty({
           <CardTitle className="text-3xl font-bold">Edit Property</CardTitle>
         </CardHeader>
         <CardContent>
-          <EditPropertyFrom />
+          <EditPropertyFrom
+            id={property.id}
+            address1={property.address1}
+            address2={property.address2}
+            city={property.city}
+            price={property.price}
+            postcode={property.postcode}
+            description={property.description}
+            bedrooms={property.bedrooms}
+            bathrooms={property.bathrooms}
+            status={property.status}
+          />
         </CardContent>
       </Card>
     </div>
