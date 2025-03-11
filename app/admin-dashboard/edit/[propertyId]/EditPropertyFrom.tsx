@@ -3,6 +3,7 @@
 import PropertyForm from "@/components/ui/PropertyForm";
 import type { Property } from "@/types/property";
 import type { propertyDataSchema } from "@/validation/propertySchema";
+import { SaveIcon } from "lucide-react";
 import type { infer as zodInfer } from "zod";
 
 export default function EditPropertyFrom({
@@ -23,7 +24,11 @@ export default function EditPropertyFrom({
     <div>
       <PropertyForm
         handleSubmit={handleSubmit}
-        submitButtonLabel="Edit Property"
+        submitButtonLabel={
+          <>
+            <SaveIcon /> Save Property
+          </>
+        }
         defaultValues={{
           address1,
           address2,
