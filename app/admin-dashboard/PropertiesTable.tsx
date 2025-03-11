@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getProperties } from "@/data/properties";
+import { PencilIcon } from "lucide-react";
 import Link from "next/link";
 
 export default async function PropertiesTable({ page = 1 }: { page?: number }) {
@@ -51,7 +52,14 @@ export default async function PropertiesTable({ page = 1 }: { page?: number }) {
                   <TableCell>{address}</TableCell>
                   <TableCell>{property.price}</TableCell>
                   <TableCell>{property.status}</TableCell>
-                  <TableCell>View / Edit </TableCell>
+                  <TableCell>
+                    View /{" "}
+                    <Button asChild>
+                      <Link href={`/admin-dashboard/edit/${property.id}`}>
+                        <PencilIcon />
+                      </Link>
+                    </Button>{" "}
+                  </TableCell>
                 </TableRow>
               );
             })}
@@ -66,9 +74,7 @@ export default async function PropertiesTable({ page = 1 }: { page?: number }) {
                     variant="outline"
                     className="mx-1"
                   >
-                    <Link href={`/admin-dashboard?page=${i + 1}`}>
-                      {i + 1}
-                    </Link>
+                    <Link href={`/admin-dashboard?page=${i + 1}`}>{i + 1}</Link>
                   </Button>
                 ))}
               </TableCell>
