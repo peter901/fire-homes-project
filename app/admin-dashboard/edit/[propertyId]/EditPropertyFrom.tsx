@@ -5,6 +5,10 @@ import type { Property } from "@/types/property";
 import type { propertyDataSchema } from "@/validation/propertySchema";
 import { SaveIcon } from "lucide-react";
 import type { infer as zodInfer } from "zod";
+import { useAuth } from "@/context/auth";
+import { useRouter } from "next/navigation";
+import { updateProperty } from "./actions";
+import { toast } from "sonner";
 
 export default function EditPropertyFrom({
   id,
@@ -18,7 +22,28 @@ export default function EditPropertyFrom({
   price,
   status,
 }: Property) {
-  const handleSubmit = async (data: zodInfer<typeof propertyDataSchema>) => {};
+    const auth = useAuth();
+    const router = useRouter();
+
+  const handleSubmit = async (data: zodInfer<typeof propertyDataSchema>) => {
+    const authToken = await auth?.currentUser?.getIdToken();
+
+    if (!authToken) {
+      return;
+    }
+    const response = await updateProperty({...data, id}, authToken);
+
+    if (response.error) {
+      toast("Error!", { description: response.message });
+      return;
+    }
+
+    if (!response.error) {
+      toast("Success!", { description: "New Property Created" });
+    }
+
+    router.push("/admin-dashboard");
+  };
 
   return (
     <div>
