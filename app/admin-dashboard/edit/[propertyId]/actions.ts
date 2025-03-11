@@ -1,3 +1,5 @@
+"use server";
+
 import type { Property } from "@/types/property";
 import { auth, firestore } from "@/firebase/server";
 import { propertyDataSchema } from "@/validation/propertySchema";
@@ -22,12 +24,8 @@ export const updateProperty = async (data: Property, authToken: string) => {
     };
   }
 
-  const property = await firestore
+  await firestore
     .collection("properties")
     .doc(id)
     .update({ ...propertyData, updated: new Date() });
-
-  return {
-    propertyId: property,
-  };
 };

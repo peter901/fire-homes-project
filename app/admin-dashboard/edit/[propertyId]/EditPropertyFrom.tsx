@@ -31,17 +31,10 @@ export default function EditPropertyFrom({
     if (!authToken) {
       return;
     }
-    const response = await updateProperty({...data, id}, authToken);
+    await updateProperty({...data, id}, authToken);
 
-    if (response.error) {
-      toast("Error!", { description: response.message });
-      return;
-    }
-
-    if (!response.error) {
-      toast("Success!", { description: "Property Edited" });
-    }
-
+    toast("Success!", { description: "Property Edited" });
+    
     router.push("/admin-dashboard");
   };
 

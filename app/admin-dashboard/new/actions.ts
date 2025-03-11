@@ -13,10 +13,9 @@ export const saveNewProperty = async (data: {
   bedrooms: number;
   bathrooms: number;
   status: "for-sale" | "draft" | "withdrawn" | "sold";
-  token: string;
-}) => {
-  const { token, ...propertyData } = data;
-  const verifiedToken = await auth.verifyIdToken(token);
+}, authToken: string) => {
+  const { ...propertyData } = data;
+  const verifiedToken = await auth.verifyIdToken(authToken);
 
   if (!verifiedToken.admin) {
     return {

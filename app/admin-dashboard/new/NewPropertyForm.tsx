@@ -13,12 +13,12 @@ export default function NewPropertyForm() {
   const router = useRouter();
 
   const handleSubmit = async (data: zodInfer<typeof propertyDataSchema>) => {
-    const token = await auth?.currentUser?.getIdToken();
+    const authToken = await auth?.currentUser?.getIdToken();
 
-    if (!token) {
+    if (!authToken) {
       return;
     }
-    const response = await saveNewProperty({ ...data, token });
+    const response = await saveNewProperty({ ...data}, authToken );
 
     if (response.error) {
       toast("Error!", { description: response.message });
