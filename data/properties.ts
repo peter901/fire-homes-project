@@ -41,17 +41,34 @@ export const getProperties = async (options?: GetPropertiesOptions) => {
     propertiesQuery = propertiesQuery.where("status", "in", status);
   }
 
-  const totalPages = await getTotalPages(propertiesQuery,pageSize);
+  const totalPages = await getTotalPages(propertiesQuery, pageSize);
 
   const propertiesSnapshot = await propertiesQuery
     .limit(pageSize)
     .offset((page - 1) * pageSize)
     .get();
 
-  const properties = propertiesSnapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  } as Property));
+  const properties = propertiesSnapshot.docs.map(
+    (doc) =>
+      ({
+        id: doc.id,
+        ...doc.data(),
+      } as Property)
+  );
 
   return { data: properties, totalPages };
+};
+
+export const getPropertyById = async (propertyId: string) => {
+  const propertySnapshot = await firestore
+    .collection("properties")
+    .doc(propertyId)
+    .get();
+
+  const propertyData = {
+    id: propertySnapshot.id,
+    ...propertySnapshot.data(),
+  } as Property;
+
+  return propertyData;
 };
