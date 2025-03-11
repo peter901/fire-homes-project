@@ -7,7 +7,7 @@ import PropertiesTable from "./PropertiesTable";
 export default async function AdminDashboard({
   searchParams,
 }: {
-  searchParams?: Promise<any>;
+  searchParams?: Promise<{ page?: string }>;
 }) {
   const searchParamsValue = await searchParams;
   return (
