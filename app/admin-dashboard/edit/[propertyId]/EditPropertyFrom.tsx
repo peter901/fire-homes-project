@@ -39,7 +39,7 @@ export default function EditPropertyFrom({
     }
 
     if (!response.error) {
-      toast("Success!", { description: "New Property Created" });
+      toast("Success!", { description: "Property Edited" });
     }
 
     router.push("/admin-dashboard");
