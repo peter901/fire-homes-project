@@ -26,7 +26,7 @@ import { Button } from "./button";
 type Props = {
   submitButtonLabel: React.ReactNode;
   handleSubmit: (data: zodInfer<typeof propertyDataSchema>) => void;
-  defaultValues: zodInfer<typeof propertyDataSchema>;
+  defaultValues?: zodInfer<typeof propertyDataSchema>;
 };
 
 export default function PropertyForm({
