@@ -64,6 +64,7 @@ export default async function PropertiesTable({ page = 1 }: { page?: number }) {
                     key={`page-button-${page}-${i}-${new Date().getTime()}`}
                     asChild
                     variant="outline"
+                    className="mx-1"
                   >
                     <Link href={`/admin-dashboard?page=${i + 1}`}>
                       {i + 1}
