@@ -3,7 +3,6 @@ import { type NextRequest, NextResponse } from "next/server";
 import { decodeJwt } from "jose";
 
 export async function middleware(request : NextRequest){
-    console.log("Middleware ---- ", request.url);
     if(request.method ==="POST"){
         return NextResponse.next();
     }
