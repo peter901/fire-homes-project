@@ -28,3 +28,5 @@ export const propertyImagesSchema = z.object({
     })
   ),
 });
+
+export const propertySchema = propertyDataSchema.and(propertyImagesSchema);
