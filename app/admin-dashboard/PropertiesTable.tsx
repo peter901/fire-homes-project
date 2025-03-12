@@ -55,7 +55,10 @@ export default async function PropertiesTable({ page = 1 }: { page?: number }) {
                   <TableCell className="flex justify-end">
                     UGX. {numeral(property.price).format("0,0")}
                   </TableCell>
-                  <TableCell> <PropertyStatusBadge status={property.status} /></TableCell>
+                  <TableCell>
+                    {" "}
+                    <PropertyStatusBadge status={property.status} />
+                  </TableCell>
                   <TableCell className="flex items-center gap-1 justify-end">
                     <Button asChild variant="outline">
                       <Link href={`/property/${property.id}`}>
