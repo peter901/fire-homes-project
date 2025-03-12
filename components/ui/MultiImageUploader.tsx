@@ -43,7 +43,7 @@ export default function MultiImageUploader({
         multiple
         accept="image/*"
       />
-      <Button type="button" onClick={() => uploadInputRef?.current?.click()}>
+      <Button className="w-full" variant="outline" type="button" onClick={() => uploadInputRef?.current?.click()}>
         Upload images
       </Button>
     </div>
