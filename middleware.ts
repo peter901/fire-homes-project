@@ -10,6 +10,10 @@ export async function middleware(request: NextRequest) {
   const cookieStore = await cookies();
   const token = cookieStore.get("firebaseAuthToken")?.value;
 
+  if(!token && request.nextUrl.pathname.startsWith("/login")){
+    return NextResponse.next();
+  }
+
   if(token && request.nextUrl.pathname.startsWith("/login")){
     return NextResponse.redirect(new URL("/", request.url));
   }
