@@ -1,6 +1,6 @@
 "use client";
 
-import { propertyDataSchema } from "@/validation/propertySchema";
+import { propertySchema } from "@/validation/propertySchema";
 import { useForm } from "react-hook-form";
 import type { infer as zodInfer } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,11 +23,12 @@ import { Input } from "./input";
 import { Textarea } from "./textarea";
 import { Button } from "./button";
 import MultiImageUploader from "./MultiImageUploader";
+import type { ImageUpload } from "./MultiImageUploader";
 
 type Props = {
   submitButtonLabel: React.ReactNode;
-  handleSubmit: (data: zodInfer<typeof propertyDataSchema>) => void;
-  defaultValues?: zodInfer<typeof propertyDataSchema>;
+  handleSubmit: (data: zodInfer<typeof propertySchema>) => void;
+  defaultValues?: zodInfer<typeof propertySchema>;
 };
 
 export default function PropertyForm({
@@ -35,7 +36,7 @@ export default function PropertyForm({
   handleSubmit,
   defaultValues,
 }: Props) {
-  const combinedDefaultValues: zodInfer<typeof propertyDataSchema> = {
+  const combinedDefaultValues: zodInfer<typeof propertySchema> = {
     ...{
       address1: "",
       address2: "",
@@ -46,12 +47,13 @@ export default function PropertyForm({
       bathrooms: 0,
       status: "draft",
       description: "",
+      images: [],
     },
     ...defaultValues,
   };
 
-  const form = useForm<zodInfer<typeof propertyDataSchema>>({
-    resolver: zodResolver(propertyDataSchema),
+  const form = useForm<zodInfer<typeof propertySchema>>({
+    resolver: zodResolver(propertySchema),
     defaultValues: combinedDefaultValues,
   });
   return (
@@ -199,7 +201,9 @@ export default function PropertyForm({
             />
           </fieldset>
         </div>
-        <MultiImageUploader onImagesChange={() => {}} />
+        <MultiImageUploader onImagesChange={(images: ImageUpload[]) => {
+          console.log(images)
+        }} />
         <Button
           type="submit"
           className="max-w-md mx-auto mt-2 w-full flex gap-2"
