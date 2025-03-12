@@ -3,7 +3,12 @@
 import type React from "react";
 import { useRef } from "react";
 import { Button } from "./button";
-import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+} from "@hello-pangea/dnd";
+import type { DropResult } from "@hello-pangea/dnd";
 import Image from "next/image";
 import { Badge } from "./badge";
 import { MoveIcon, XIcon } from "lucide-react";
@@ -37,6 +42,17 @@ export default function MultiImageUploader({
     onImagesChange([...images, ...newImages]);
   };
 
+  const handleDragEnd = (result: DropResult) => {
+    if (!result.destination) {
+      return;
+    }
+
+    const items = [...images];
+    const [reorderedImage] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedImage);
+    onImagesChange(items);
+  };
+
   return (
     <div className="w-full max-w-3xl mx-auto p-4 ">
       <input
@@ -55,7 +71,7 @@ export default function MultiImageUploader({
       >
         Upload images
       </Button>
-      <DragDropContext onDragEnd={() => {}}>
+      <DragDropContext onDragEnd={handleDragEnd}>
         <Droppable droppableId="property-images" direction="vertical">
           {(provided) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
@@ -78,18 +94,20 @@ export default function MultiImageUploader({
                           />
                         </div>
                         <div className="flex-grow">
-                            <p className="text-sm font-medium">
-                                Image {index + 1}
-                            </p>
-                            {index === 0 && <Badge variant="success">Featured Image</Badge>}
+                          <p className="text-sm font-medium">
+                            Image {index + 1}
+                          </p>
+                          {index === 0 && (
+                            <Badge variant="success">Featured Image</Badge>
+                          )}
                         </div>
                         <div className="flex items-center p-2">
-                            <button type="button" className="text-red-500 p-2">
-                                <XIcon />
-                            </button>
-                            <div className="text-gray-500">
-                                <MoveIcon />
-                            </div>
+                          <button type="button" className="text-red-500 p-2">
+                            <XIcon />
+                          </button>
+                          <div className="text-gray-500">
+                            <MoveIcon />
+                          </div>
                         </div>
                       </div>
                     </div>
