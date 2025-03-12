@@ -201,9 +201,24 @@ export default function PropertyForm({
             />
           </fieldset>
         </div>
-        <MultiImageUploader onImagesChange={(images: ImageUpload[]) => {
-          console.log(images)
-        }} />
+        <FormField
+          control={form.control}
+          name="images"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <MultiImageUploader
+                  onImagesChange={(images: ImageUpload[]) => {
+                    form.setValue("images", images);
+                  }}
+                  images={field.value}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <Button
           type="submit"
           className="max-w-md mx-auto mt-2 w-full flex gap-2"
