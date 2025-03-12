@@ -53,6 +53,11 @@ export default function MultiImageUploader({
     onImagesChange(items);
   };
 
+  const handleDelete = (id: string) => {
+    const updatedImages = images.filter(image => image.id !== id);
+    onImagesChange(updatedImages);
+  }
+
   return (
     <div className="w-full max-w-3xl mx-auto p-4 ">
       <input
@@ -102,7 +107,7 @@ export default function MultiImageUploader({
                           )}
                         </div>
                         <div className="flex items-center p-2">
-                          <button type="button" className="text-red-500 p-2">
+                          <button type="button" className="text-red-500 p-2" onClick={() => handleDelete(image.id)}>
                             <XIcon />
                           </button>
                           <div className="text-gray-500">
