@@ -3,6 +3,8 @@
 import type React from "react";
 import { useRef } from "react";
 import { Button } from "./button";
+import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
+import Image from "next/image";
 
 export type ImageUpload = {
   id: string;
@@ -43,9 +45,45 @@ export default function MultiImageUploader({
         multiple
         accept="image/*"
       />
-      <Button className="w-full" variant="outline" type="button" onClick={() => uploadInputRef?.current?.click()}>
+      <Button
+        className="w-full"
+        variant="outline"
+        type="button"
+        onClick={() => uploadInputRef?.current?.click()}
+      >
         Upload images
       </Button>
+      <DragDropContext onDragEnd={() => {}}>
+        <Droppable droppableId="property-images" direction="vertical">
+          {(provided) => (
+            <div {...provided.droppableProps} ref={provided.innerRef}>
+              {images.map((image, index) => (
+                <Draggable key={image.id} draggableId={image.id} index={index}>
+                  {(provided) => (
+                    <div
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      ref={provided.innerRef}
+                      className="relative p-2"
+                    >
+                      <div className="bg-gray-100 rounded-lg flex items-center">
+                        <div className="size-16">
+                          <Image
+                            src={image.url}
+                            alt=""
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     </div>
   );
 }
