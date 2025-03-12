@@ -80,8 +80,9 @@ export default async function PropertiesTable({ page = 1 }: { page?: number }) {
               <TableCell colSpan={4} className="text-center">
                 {Array.from({ length: totalPages }).map((_, i) => (
                   <Button
+                    disabled={page === i + 1}
                     key={`page-button-${page}-${i}-${new Date().getTime()}`}
-                    asChild
+                    asChild={page !== i + 1}
                     variant="outline"
                     className="mx-1"
                   >
