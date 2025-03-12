@@ -51,7 +51,7 @@ export default async function PropertiesTable({ page = 1 }: { page?: number }) {
               return (
                 <TableRow key={property.id}>
                   <TableCell>{address}</TableCell>
-                  <TableCell>{numeral(property.price).format("0,0")}</TableCell>
+                  <TableCell>UGX. {numeral(property.price).format("0,0")}</TableCell>
                   <TableCell>{property.status}</TableCell>
                   <TableCell className="flex items-center gap-2">
                     <Button asChild variant="outline">
