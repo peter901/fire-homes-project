@@ -30,7 +30,7 @@ export default function MultiImageUploader({
       };
     });
 
-    onImagesChange([...images, ...newImages])
+    onImagesChange([...images, ...newImages]);
   };
 
   return (
