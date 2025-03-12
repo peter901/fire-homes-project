@@ -20,7 +20,7 @@ export const propertyDataSchema = z.object({
 });
 
 export const propertyImagesSchema = z.object({
-  image: z.array(
+  images: z.array(
     z.object({
       id: z.string(),
       url: z.string(),
