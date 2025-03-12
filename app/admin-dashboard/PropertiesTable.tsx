@@ -57,7 +57,7 @@ export default async function PropertiesTable({ page = 1 }: { page?: number }) {
                   <TableCell>{property.status}</TableCell>
                   <TableCell className="flex items-center gap-2">
                     <Button asChild variant="outline">
-                      <Link href={`/admin-dashboard/edit/${property.id}`}>
+                      <Link href={`/property/${property.id}`}>
                         <EyeIcon />
                       </Link>
                     </Button>
