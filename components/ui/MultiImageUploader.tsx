@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useRef } from "react";
+import type React from "react";
+import { useRef } from "react";
 import { Button } from "./button";
 
 export type ImageUpload = {
@@ -10,7 +11,7 @@ export type ImageUpload = {
 };
 
 export default function MultiImageUploader({
-  images,
+  images = [],
   onImagesChange,
 }: {
   images?: ImageUpload[];
@@ -21,7 +22,15 @@ export default function MultiImageUploader({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
 
-    console.log(files);
+    const newImages = files.map((file, index) => {
+      return {
+        id: `${Date.now()}-${index}-${file.name}`,
+        url: URL.createObjectURL(file),
+        file,
+      };
+    });
+
+    onImagesChange([...images, ...newImages])
   };
 
   return (
