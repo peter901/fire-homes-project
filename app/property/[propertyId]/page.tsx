@@ -50,8 +50,8 @@ export default async function PropertyPage({
             </CarouselContent>
             {property.images.length > 1 && (
               <>
-                <CarouselPrevious className="translate-x-24" />
-                <CarouselNext className="-translate-x-24" />
+                <CarouselPrevious className="translate-x-24 size-12" />
+                <CarouselNext className="-translate-x-24 size-12" />
               </>
             )}
           </Carousel>
