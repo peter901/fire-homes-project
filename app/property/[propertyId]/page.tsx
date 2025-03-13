@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   Carousel,
   CarouselContent,
@@ -8,10 +7,11 @@ import {
 } from "@/components/ui/carousel";
 import PropertyStatusBadge from "@/components/ui/property-badge";
 import { getPropertyById } from "@/data/properties";
-import { ArrowLeftIcon, BathIcon, BedIcon } from "lucide-react";
+import { BathIcon, BedIcon } from "lucide-react";
 import Image from "next/image";
 import numeral from "numeral";
 import ReactMarkDown from "react-markdown";
+import BackButton from "./BackButton";
 
 export default async function PropertyPage({
   params,
@@ -58,9 +58,7 @@ export default async function PropertyPage({
         )}
 
         <div className="property-descrition max-w-screen-md mx-auto py-10 px-4">
-          <Button>
-            <ArrowLeftIcon /> Back
-          </Button>
+          <BackButton /> 
           <ReactMarkDown>{property.description}</ReactMarkDown>
         </div>
       </div>
