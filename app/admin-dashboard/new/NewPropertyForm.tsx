@@ -1,7 +1,7 @@
 "use client";
 import PropertyForm from "@/components/ui/PropertyForm";
 import type { infer as zodInfer } from "zod";
-import type { propertyDataSchema } from "@/validation/propertySchema";
+import type { propertySchema } from "@/validation/propertySchema";
 import { PlusCircleIcon } from "lucide-react";
 import { useAuth } from "@/context/auth";
 import { saveNewProperty } from "./actions";
@@ -12,7 +12,7 @@ export default function NewPropertyForm() {
   const auth = useAuth();
   const router = useRouter();
 
-  const handleSubmit = async (data: zodInfer<typeof propertyDataSchema>) => {
+  const handleSubmit = async (data: zodInfer<typeof propertySchema>) => {
     const authToken = await auth?.currentUser?.getIdToken();
 
     if (!authToken) {
