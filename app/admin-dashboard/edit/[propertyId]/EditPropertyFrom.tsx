@@ -12,7 +12,7 @@ import { toast } from "sonner";
 import { deleteObject, ref, uploadBytesResumable } from "firebase/storage";
 import type { UploadTask } from "firebase/storage";
 import { storage } from "@/firebase/client";
-import { savePropertiesImage } from "../../new/actions";
+import { savePropertiesImage } from "../../actions";
 
 export default function EditPropertyFrom({
   id,
