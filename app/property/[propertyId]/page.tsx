@@ -20,7 +20,7 @@ export default async function PropertyPage({
           <ReactMarkDown>{property.description}</ReactMarkDown>
         </div>
       </div>
-      <div className="bg-sky-200 h-screen sticky">property details</div>
+      <div className="bg-sky-200 h-screen sticky top-0">property details</div>
     </div>
   );
 }
