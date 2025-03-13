@@ -21,6 +21,7 @@ export default function EditPropertyFrom({
   postcode,
   price,
   status,
+  images = []
 }: Property) {
     const auth = useAuth();
     const router = useRouter();
@@ -57,6 +58,10 @@ export default function EditPropertyFrom({
           postcode,
           price,
           status,
+          images: images.map((image) => ({
+            id: image,
+            url: image
+          }))
         }}
       />
     </div>

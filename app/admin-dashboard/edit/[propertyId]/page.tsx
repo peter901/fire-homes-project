@@ -40,6 +40,7 @@ export default async function EditProperty({
             bedrooms={property.bedrooms}
             bathrooms={property.bathrooms}
             status={property.status}
+            images={property.images || []}
           />
         </CardContent>
       </Card>
