@@ -71,38 +71,38 @@ body {
   }
 }
 
-.property-descrition, h1 {
+.property-descrition h1 {
   @apply text-5xl font-bold my-4;
 }
 
-.property-descrition, h2 {
+.property-descrition h2 {
   @apply text-4xl font-bold my-4;
 }
 
-.property-descrition, h3 {
+.property-descrition h3 {
   @apply text-3xl font-bold my-4;
 }
 
-.property-descrition, h4 {
+.property-descrition h4 {
   @apply text-2xl font-bold my-4;
 }
 
-.property-descrition, h5 {
+.property-descrition h5 {
   @apply text-xl font-bold my-4;
 }
 
-.property-descrition, h6 {
+.property-descrition h6 {
   @apply text-lg font-bold my-4;
 }
 
-.property-descrition, p {
+.property-descrition p {
   @apply my-4 font-normal text-base;
 }
 
-.property-descrition, ul {
+.property-descrition ul {
   @apply list-disc my-4 ml-4;
 }
 
-.property-descrition, ol {
+.property-descrition ol {
   @apply list-decimal my-4 ml-4;
 }
