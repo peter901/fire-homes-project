@@ -4,7 +4,7 @@ import type { infer as zodInfer } from "zod";
 import type { propertySchema } from "@/validation/propertySchema";
 import { PlusCircleIcon } from "lucide-react";
 import { useAuth } from "@/context/auth";
-import { saveNewProperty } from "./actions";
+import { createProperty } from "./actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
@@ -18,7 +18,7 @@ export default function NewPropertyForm() {
     if (!authToken) {
       return;
     }
-    const response = await saveNewProperty({ ...data}, authToken );
+    const response = await createProperty({ ...data}, authToken );
 
     if (response.error) {
       toast("Error!", { description: response.message });
