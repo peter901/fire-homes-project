@@ -46,18 +46,18 @@ export default function AuthButtons() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link href="account"> My Account </Link>
+              <Link href="/account"> My Account </Link>
             </DropdownMenuItem>
 
             {!!auth.customClaims?.admin && (
               <DropdownMenuItem asChild>
-                <Link href="admin-dashboard"> Admin Dashboard </Link>
+                <Link href="/admin-dashboard"> Admin Dashboard </Link>
               </DropdownMenuItem>
             )}
 
             {!auth.customClaims?.admin && (
               <DropdownMenuItem asChild>
-                <Link href="account/favourites"> My Favourites</Link>
+                <Link href="/account/favourites"> My Favourites</Link>
               </DropdownMenuItem>
             )}
             <DropdownMenuItem
