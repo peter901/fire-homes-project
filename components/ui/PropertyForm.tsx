@@ -24,6 +24,7 @@ import { Textarea } from "./textarea";
 import { Button } from "./button";
 import MultiImageUploader from "./MultiImageUploader";
 import type { ImageUpload } from "./MultiImageUploader";
+import imageUrlFormatter from "@/lib/imageUrlFormatter";
 
 type Props = {
   submitButtonLabel: React.ReactNode;
@@ -214,7 +215,7 @@ export default function PropertyForm({
                   images={field.value}
                   urlFormatter={(image) => {
                     if (!image.file) {
-                      return `https://firebasestorage.googleapis.com/v0/b/fire-homes-project-eeac6.firebasestorage.app/o/${encodeURIComponent(image.url)}?alt=media`;
+                      return imageUrlFormatter(image.url);
                     }
                     return image.url;
                   }}

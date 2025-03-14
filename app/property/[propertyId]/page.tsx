@@ -12,6 +12,7 @@ import Image from "next/image";
 import numeral from "numeral";
 import ReactMarkDown from "react-markdown";
 import BackButton from "./BackButton";
+import imageUrlFormatter from "@/lib/imageUrlFormatter";
 
 export default async function PropertyPage({
   params,
@@ -37,9 +38,7 @@ export default async function PropertyPage({
                 <CarouselItem key={image}>
                   <div className="relative h-[80vh] m-h-80">
                     <Image
-                      src={`https://firebasestorage.googleapis.com/v0/b/fire-homes-project-eeac6.firebasestorage.app/o/${encodeURIComponent(
-                        image
-                      )}?alt=media`}
+                      src={imageUrlFormatter(image)}
                       alt=""
                       fill
                       className="object-cover"
