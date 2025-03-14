@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import FiltersForm from "./FiltersForm";
 
 export default function PropertySearch() {
   return (
@@ -10,7 +11,7 @@ export default function PropertySearch() {
           <CardTitle>Filters</CardTitle>
         </CardHeader>
         <CardContent>
-            Filters
+            <FiltersForm />
         </CardContent>
       </Card>
     </div>
