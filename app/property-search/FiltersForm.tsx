@@ -39,6 +39,8 @@ export default function FiltersForm() {
     if (data.minBedrooms) {
       newSearchParams.set("minBedrooms", data.minBedrooms);
     }
+
+    newSearchParams.set("page","1");
   };
 
   return (
