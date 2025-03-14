@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function PropertySearch() {
   return (
@@ -9,6 +9,9 @@ export default function PropertySearch() {
         <CardHeader>
           <CardTitle>Filters</CardTitle>
         </CardHeader>
+        <CardContent>
+            Filters
+        </CardContent>
       </Card>
     </div>
   );
