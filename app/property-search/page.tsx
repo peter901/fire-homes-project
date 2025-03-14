@@ -118,17 +118,19 @@ export default async function PropertySearch({
 
           const newSearchParams = new URLSearchParams();
 
-          if (searchParamValues.minPrice) {
+          if (searchParamValues?.minPrice) {
             newSearchParams.set("minPrice", searchParamValues.minPrice);
           }
-      
-          if (searchParamValues.maxPrice) {
+
+          if (searchParamValues?.maxPrice) {
             newSearchParams.set("maxPrice", searchParamValues.maxPrice);
           }
-      
-          if (searchParamValues.minBedrooms) {
+
+          if (searchParamValues?.minBedrooms) {
             newSearchParams.set("minBedrooms", searchParamValues.minBedrooms);
           }
+
+          newSearchParams.set("page", `${i + 1}`);
           
           return (
             <Button
