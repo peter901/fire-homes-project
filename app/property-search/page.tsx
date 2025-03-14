@@ -131,7 +131,7 @@ export default async function PropertySearch({
           }
 
           newSearchParams.set("page", `${i + 1}`);
-          
+
           return (
             <Button
               asChild={page !== i + 1}
@@ -140,7 +140,7 @@ export default async function PropertySearch({
               variant="outline"
               className="mx-1 mt-5 mb-40"
             >
-              <Link href={`/property-search?page=${i + 1}`}>{i + 1}</Link>
+              <Link href={`/property-search?${newSearchParams.toString()}`}>{i + 1}</Link>
             </Button>
           );
         })}
