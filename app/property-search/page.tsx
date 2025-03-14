@@ -42,7 +42,7 @@ export default async function PropertySearch({
     },
     pagination: {
       page,
-      pageSize: 3,
+      pageSize: 6,
     },
   });
 
@@ -112,7 +112,7 @@ export default async function PropertySearch({
           );
         })}
       </div>
-      <div className="flex gap-2 items-center justify-center">
+      <div className="flex gap-2 items-center justify-center py-10">
         {Array.from({ length: totalPages }).map((_, i) => {
           const pageKey = `page-${i + 1}`;
 
@@ -138,7 +138,7 @@ export default async function PropertySearch({
               key={pageKey}
               disabled={page === i + 1}
               variant="outline"
-              className="mx-1 mt-5 mb-40"
+              className="mx-1"
             >
               <Link href={`/property-search?${newSearchParams.toString()}`}>{i + 1}</Link>
             </Button>
