@@ -1,6 +1,9 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import z from "zod";
+import type { infer as zodInfer } from "zod";
 
 const formSchema = z
   .object({
@@ -30,5 +33,15 @@ const formSchema = z
   });
 
 export default function SignUpForm() {
+  const form = useForm<zodInfer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      name: "",
+      password: "",
+      confirmPassowrd: "",
+    },
+  });
+  
   return <div>SignUpForm</div>;
 }
