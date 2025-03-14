@@ -33,7 +33,7 @@ export default async function PropertySearch({
     : parsedMinBedrooms;
   const maxPrice = Number.isNaN(parsedMaxPrice) ? null : parsedMaxPrice;
 
-  const { data } = await getProperties({
+  const { data, totalPages } = await getProperties({
     filters: {
       minPrice,
       maxPrice,
@@ -42,6 +42,7 @@ export default async function PropertySearch({
     },
     pagination: {
       page,
+      pageSize: 3,
     },
   });
 
@@ -108,6 +109,37 @@ export default async function PropertySearch({
                 </div>
               </CardContent>
             </Card>
+          );
+        })}
+      </div>
+      <div className="flex gap-2 items-center justify-center">
+        {Array.from({ length: totalPages }).map((_, i) => {
+          const pageKey = `page-${i + 1}`;
+
+          const newSearchParams = new URLSearchParams();
+
+          if (searchParamValues.minPrice) {
+            newSearchParams.set("minPrice", searchParamValues.minPrice);
+          }
+      
+          if (searchParamValues.maxPrice) {
+            newSearchParams.set("maxPrice", searchParamValues.maxPrice);
+          }
+      
+          if (searchParamValues.minBedrooms) {
+            newSearchParams.set("minBedrooms", searchParamValues.minBedrooms);
+          }
+          
+          return (
+            <Button
+              asChild={page !== i + 1}
+              key={pageKey}
+              disabled={page === i + 1}
+              variant="outline"
+              className="mx-1 mt-5 mb-40"
+            >
+              <Link href={`/property-search?page=${i + 1}`}>{i + 1}</Link>
+            </Button>
           );
         })}
       </div>

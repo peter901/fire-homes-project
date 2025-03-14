@@ -29,7 +29,7 @@ export default function FiltersForm() {
   });
 
   const handleSubmit = async (data: zodInfer<typeof formSchema>) => {
-    console.log(data);
+    
     const newSearchParams = new URLSearchParams();
 
     if (data.minPrice) {
