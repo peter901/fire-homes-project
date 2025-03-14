@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import type { infer as zodInfer } from "zod";
@@ -15,6 +16,7 @@ const formSchema = z.object({
 });
 
 export default function FiltersForm() {
+  const router = useRouter();
   const form = useForm<zodInfer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,7 +42,8 @@ export default function FiltersForm() {
       newSearchParams.set("minBedrooms", data.minBedrooms);
     }
 
-    newSearchParams.set("page","1");
+    newSearchParams.set("page", "1");
+    router.push(`/property-search?${newSearchParams.toString()}`)
   };
 
   return (
