@@ -34,7 +34,7 @@ export const getProperties = async (options?: GetPropertiesOptions) => {
   }
 
   if (minBedrooms !== null && minBedrooms !== undefined) {
-    propertiesQuery = propertiesQuery.where("price", ">=", minBedrooms);
+    propertiesQuery = propertiesQuery.where("bedrooms", ">=", minBedrooms);
   }
 
   if (status) {
