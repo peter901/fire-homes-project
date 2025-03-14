@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import FiltersForm from "./FiltersForm";
+import { Suspense } from "react";
 
 export default function PropertySearch() {
   return (
@@ -11,7 +12,9 @@ export default function PropertySearch() {
           <CardTitle>Filters</CardTitle>
         </CardHeader>
         <CardContent>
+          <Suspense>
             <FiltersForm />
+          </Suspense>
         </CardContent>
       </Card>
     </div>
