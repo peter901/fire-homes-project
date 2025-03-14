@@ -14,11 +14,11 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import type { infer as zodInfer } from "zod";
-import { formSchema } from "@/validation/signupSchema";
+import { signUpUserSchema } from "@/validation/signupSchema";
 
 export default function SignUpForm() {
-  const form = useForm<zodInfer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<zodInfer<typeof signUpUserSchema>>({
+    resolver: zodResolver(signUpUserSchema),
     defaultValues: {
       email: "",
       name: "",
@@ -27,7 +27,7 @@ export default function SignUpForm() {
     },
   });
 
-  const handleSubmit = async (data: zodInfer<typeof formSchema>) => {
+  const handleSubmit = async (data: zodInfer<typeof signUpUserSchema>) => {
     console.log(data);
   };
 

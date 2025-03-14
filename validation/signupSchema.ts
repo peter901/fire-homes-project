@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const formSchema = z
+export const signUpUserSchema = z
   .object({
     email: z.string().email(),
     name: z.string().min(2, "Name must be longer than 2 charaters"),
