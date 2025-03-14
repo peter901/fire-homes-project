@@ -15,8 +15,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import type { infer as zodInfer } from "zod";
 import { signUpUserSchema } from "@/validation/signupSchema";
+import { signUpUser } from "./actions";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function SignUpForm() {
+  const router = useRouter();
   const form = useForm<zodInfer<typeof signUpUserSchema>>({
     resolver: zodResolver(signUpUserSchema),
     defaultValues: {
@@ -28,7 +32,20 @@ export default function SignUpForm() {
   });
 
   const handleSubmit = async (data: zodInfer<typeof signUpUserSchema>) => {
-    console.log(data);
+    const response = await signUpUser(data);
+
+    if (response?.error) {
+      toast("Error!!!", {
+        description: response.message,
+      });
+      return;
+    }
+
+    toast("Success", {
+      description: "Sign up successfully",
+    });
+
+    router.push("/login");
   };
 
   return (
