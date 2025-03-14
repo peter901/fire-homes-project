@@ -26,6 +26,19 @@ export default function FiltersForm() {
 
   const handleSubmit = async (data: zodInfer<typeof formSchema>) => {
     console.log(data);
+    const newSearchParams = new URLSearchParams();
+
+    if (data.minPrice) {
+      newSearchParams.set("minPrice", data.minPrice);
+    }
+
+    if (data.maxPrice) {
+      newSearchParams.set("maxPrice", data.maxPrice);
+    }
+
+    if (data.minBedrooms) {
+      newSearchParams.set("minBedrooms", data.minBedrooms);
+    }
   };
 
   return (
@@ -82,9 +95,7 @@ export default function FiltersForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" >
-            Search
-        </Button>
+        <Button type="submit">Search</Button>
       </form>
     </Form>
   );
