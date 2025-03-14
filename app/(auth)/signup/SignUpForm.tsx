@@ -13,35 +13,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import z from "zod";
 import type { infer as zodInfer } from "zod";
-
-const formSchema = z
-  .object({
-    email: z.string().email(),
-    name: z.string().min(2, "Name must be longer than 2 charaters"),
-    password: z.string(),
-    confirmPassowrd: z.string().refine(
-      (value) => {
-        const regex =
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-        return regex.test(value);
-      },
-      {
-        message:
-          "Password must contain atleast 6 characters, an uppercase letter, lower case letter, a number and a special character",
-      }
-    ),
-  })
-  .superRefine((data, ctx) => {
-    if (data.password !== data.confirmPassowrd) {
-      ctx.addIssue({
-        message: "Passwords do not match",
-        path: ["passwordConfirm"],
-        code: "custom",
-      });
-    }
-  });
+import { formSchema } from "@/validation/signupSchema";
 
 export default function SignUpForm() {
   const form = useForm<zodInfer<typeof formSchema>>({
@@ -60,7 +33,10 @@ export default function SignUpForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col gap-4" >
+      <form
+        onSubmit={form.handleSubmit(handleSubmit)}
+        className="flex flex-col gap-4"
+      >
         <FormField
           control={form.control}
           name="name"
@@ -114,17 +90,19 @@ export default function SignUpForm() {
               <FormItem>
                 <FormLabel>Confirm Password</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="Confirm Password" type="password" />
+                  <Input
+                    {...field}
+                    placeholder="Confirm Password"
+                    type="password"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             );
           }}
         />
-        <Button type="submit">
-            Sign up
-        </Button>
-        <div className="text-center" >or</div>
+        <Button type="submit">Sign up</Button>
+        <div className="text-center">or</div>
       </form>
       <div className="mt-4">
         <ContinueWithGoogleButton />
