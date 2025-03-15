@@ -2,7 +2,11 @@
 
 import { auth } from "@/firebase/client";
 import type { User, ParsedToken } from "firebase/auth";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 import { removeToken, setToken } from "./actions";
 
@@ -11,6 +15,7 @@ type AuthContextType = {
   logout: () => Promise<void>;
   loginWithGoogle: () => Promise<void>;
   customClaims: ParsedToken | null | undefined;
+  loginWithEmailandPassword: (email: string, password: string) => void;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -55,6 +60,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     await signInWithPopup(auth, provider);
   };
 
+  const loginWithEmailandPassword = async (email: string, password: string) => {
+    await signInWithEmailAndPassword(auth, email, password);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -62,6 +71,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         logout,
         loginWithGoogle,
         customClaims,
+        loginWithEmailandPassword,
       }}
     >
       {children}
