@@ -62,6 +62,6 @@ export const config = {
     "/signup",
     "/account",
     "/account:path*",
-    "property-search",
+    "/property-search",
   ],
 };
