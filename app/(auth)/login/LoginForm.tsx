@@ -40,10 +40,10 @@ export default function LoginForm() {
     }
 
     toast("Success", {
-      description: "Sign up successfully",
+      description: "Login successfully",
     });
 
-    router.push("/login");
+    router.push("/");
   };
 
   return (
