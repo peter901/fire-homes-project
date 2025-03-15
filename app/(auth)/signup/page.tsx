@@ -1,5 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import SignUpForm from "./SignUpForm";
+import Link from "next/link";
 
 export default function Signup() {
   return (
@@ -10,6 +11,9 @@ export default function Signup() {
       <CardContent>
         <SignUpForm />
       </CardContent>
+      <CardFooter>
+        Already have an account? <Link href="/login" className="pl-2 underline">Login here</Link>
+      </CardFooter>
     </Card>
   );
 }
