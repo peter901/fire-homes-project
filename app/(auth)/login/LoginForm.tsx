@@ -17,9 +17,11 @@ import type { infer as zodInfer } from "zod";
 import { loginUserSchema } from "@/validation/loginSchema";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { loginUser } from "./actions";
+import Link from "next/link";
+import { useAuth } from "@/context/auth";
 
 export default function LoginForm() {
+  const auth = useAuth()
   const router = useRouter();
   const form = useForm<zodInfer<typeof loginUserSchema>>({
     resolver: zodResolver(loginUserSchema),
@@ -30,20 +32,7 @@ export default function LoginForm() {
   });
 
   const handleSubmit = async (data: zodInfer<typeof loginUserSchema>) => {
-    const response = await loginUser(data);
-
-    if (response?.error) {
-      toast("Error!!!", {
-        description: response.message,
-      });
-      return;
-    }
-
-    toast("Success", {
-      description: "Login successfully",
-    });
-
-    router.push("/");
+    auth?.loginWithEmailandPassword(data.email, data.password);
   };
 
   return (
@@ -83,6 +72,12 @@ export default function LoginForm() {
           }}
         />
         <Button type="submit">Login</Button>
+        <div>
+          Forgot your password?
+          <Link href="/forgot-password" className="pl-2 underline">
+            Reset password
+          </Link>
+        </div>
         <div className="text-center">or</div>
       </form>
       <div className="mt-4">
