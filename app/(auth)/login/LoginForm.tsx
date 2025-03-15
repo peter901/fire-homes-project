@@ -15,14 +15,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import type { infer as zodInfer } from "zod";
 import { loginUserSchema } from "@/validation/loginSchema";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/context/auth";
 
 export default function LoginForm() {
   const auth = useAuth()
-  const router = useRouter();
   const form = useForm<zodInfer<typeof loginUserSchema>>({
     resolver: zodResolver(loginUserSchema),
     defaultValues: {
