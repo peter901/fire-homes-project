@@ -4,8 +4,7 @@ export const signUpUserSchema = z
   .object({
     email: z.string().email(),
     name: z.string().min(2, "Name must be longer than 2 charaters"),
-    password: z.string(),
-    confirmPassowrd: z.string().refine(
+    password: z.string().refine(
       (value) => {
         const regex =
           /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
@@ -16,6 +15,7 @@ export const signUpUserSchema = z
           "Password must contain atleast 6 characters, an uppercase letter, lower case letter, a number and a special character",
       }
     ),
+    confirmPassowrd: z.string(),
   })
   .superRefine((data, ctx) => {
     if (data.password !== data.confirmPassowrd) {
