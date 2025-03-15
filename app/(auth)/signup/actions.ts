@@ -24,10 +24,10 @@ export const signUpUser = async (data: {
       email: data.email,
       password: data.password,
     });
-  } catch {
+  } catch(e) {
     return {
       error: true,
-      message: "Could not create user",
+      message: (e instanceof Error ? e.message : "Could not create user"),
     };
   }
 };

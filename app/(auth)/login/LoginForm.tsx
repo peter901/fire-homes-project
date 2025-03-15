@@ -35,7 +35,11 @@ export default function LoginForm() {
     } catch (e) {
       toast("Error!!!", {
         description:
-          (e as { code: string }).code === "auth/invalid-credential"
+          e &&
+          typeof e === "object" &&
+          "code" in e &&
+          typeof e.code === "string" &&
+          e.code === "auth/invalid-credential"
             ? "Incorrect username or password"
             : "An error occured",
       });
