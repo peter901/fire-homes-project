@@ -17,9 +17,10 @@ import type { infer as zodInfer } from "zod";
 import { loginUserSchema } from "@/validation/loginSchema";
 import Link from "next/link";
 import { useAuth } from "@/context/auth";
+import { toast } from "sonner";
 
 export default function LoginForm() {
-  const auth = useAuth()
+  const auth = useAuth();
   const form = useForm<zodInfer<typeof loginUserSchema>>({
     resolver: zodResolver(loginUserSchema),
     defaultValues: {
@@ -29,7 +30,16 @@ export default function LoginForm() {
   });
 
   const handleSubmit = async (data: zodInfer<typeof loginUserSchema>) => {
-    auth?.loginWithEmailandPassword(data.email, data.password);
+    try {
+      await auth?.loginWithEmailandPassword(data.email, data.password);
+    } catch (e) {
+      toast("Error!!!", {
+        description:
+          (e as { code: string }).code === "auth/invalid-credential"
+            ? "Incorrect username or password"
+            : "An error occured",
+      });
+    }
   };
 
   return (
