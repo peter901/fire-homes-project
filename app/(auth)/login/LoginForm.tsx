@@ -48,10 +48,7 @@ export default function LoginForm() {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(handleSubmit)}
-        className="flex flex-col gap-4"
-      >
+      <form onSubmit={form.handleSubmit(handleSubmit)}>
         <fieldset
           className="flex flex-col gap-4"
           disabled={form.formState.isSubmitting}
