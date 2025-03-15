@@ -15,7 +15,7 @@ type AuthContextType = {
   logout: () => Promise<void>;
   loginWithGoogle: () => Promise<void>;
   customClaims: ParsedToken | null | undefined;
-  loginWithEmailandPassword: (email: string, password: string) => void;
+  loginWithEmailandPassword: (email: string, password: string) => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
