@@ -5,8 +5,10 @@ import { useAuth } from "@/context/auth";
 
 export default function FavouriteToggleButton({
   propertyId,
+  isFavourite,
 }: {
   propertyId: string;
+  isFavourite: boolean;
 }) {
   const auth = useAuth();
   return (
@@ -21,7 +23,7 @@ export default function FavouriteToggleButton({
         await addFavourite(propertyId, tokenResult.token);
       }}
     >
-      <HeartIcon />
+      <HeartIcon fill={isFavourite ? "blue" : "white"} />
     </button>
   );
 }
