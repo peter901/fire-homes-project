@@ -1,5 +1,6 @@
-import ContinueWithGoogleButton from "@/components/ContinueWithGoogleButton";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import LoginForm from "./LoginForm";
+import Link from "next/link";
 
 
 export default function Login(){
@@ -11,8 +12,11 @@ export default function Login(){
                 </CardTitle>
             </CardHeader>
             <CardContent>
-                <ContinueWithGoogleButton />
+                <LoginForm />
             </CardContent>
+            <CardFooter>
+                Do not have an account? <Link href="/signup" className="pl-2 underline">Signup here</Link>
+            </CardFooter>
         </Card>
     )
 }

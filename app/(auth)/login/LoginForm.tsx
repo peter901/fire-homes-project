@@ -14,38 +14,39 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import type { infer as zodInfer } from "zod";
-import { signUpUserSchema } from "@/validation/signupSchema";
-import { signUpUser } from "./actions";
+import { loginUserSchema } from "@/validation/loginSchema";
+import Link from "next/link";
+import { useAuth } from "@/context/auth";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-export default function SignUpForm() {
+export default function LoginForm() {
   const router = useRouter();
-  const form = useForm<zodInfer<typeof signUpUserSchema>>({
-    resolver: zodResolver(signUpUserSchema),
+  const auth = useAuth();
+  const form = useForm<zodInfer<typeof loginUserSchema>>({
+    resolver: zodResolver(loginUserSchema),
     defaultValues: {
       email: "",
-      name: "",
       password: "",
-      confirmPassowrd: "",
     },
   });
 
-  const handleSubmit = async (data: zodInfer<typeof signUpUserSchema>) => {
-    const response = await signUpUser(data);
-
-    if (response?.error) {
+  const handleSubmit = async (data: zodInfer<typeof loginUserSchema>) => {
+    try {
+      await auth?.loginWithEmailandPassword(data.email, data.password);
+      router.refresh();
+    } catch (e) {
       toast("Error!!!", {
-        description: response.message,
+        description:
+          e &&
+          typeof e === "object" &&
+          "code" in e &&
+          typeof e.code === "string" &&
+          e.code === "auth/invalid-credential"
+            ? "Incorrect username or password"
+            : "An error occured",
       });
-      return;
     }
-
-    toast("Success", {
-      description: "Sign up successfully",
-    });
-
-    router.push("/login");
   };
 
   return (
@@ -55,21 +56,6 @@ export default function SignUpForm() {
           className="flex flex-col gap-4"
           disabled={form.formState.isSubmitting}
         >
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => {
-              return (
-                <FormItem>
-                  <FormLabel>Your name</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="Your name" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              );
-            }}
-          />
           <FormField
             control={form.control}
             name="email"
@@ -100,26 +86,13 @@ export default function SignUpForm() {
               );
             }}
           />
-          <FormField
-            control={form.control}
-            name="confirmPassowrd"
-            render={({ field }) => {
-              return (
-                <FormItem>
-                  <FormLabel>Confirm Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="Confirm Password"
-                      type="password"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              );
-            }}
-          />
-          <Button type="submit">Sign up</Button>
+          <Button type="submit">Login</Button>
+          <div>
+            Forgot your password?
+            <Link href="/forgot-password" className="pl-2 underline">
+              Reset password
+            </Link>
+          </div>
           <div className="text-center">or</div>
         </fieldset>
       </form>
