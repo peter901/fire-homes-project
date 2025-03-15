@@ -18,8 +18,10 @@ import { loginUserSchema } from "@/validation/loginSchema";
 import Link from "next/link";
 import { useAuth } from "@/context/auth";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
+  const router = useRouter();
   const auth = useAuth();
   const form = useForm<zodInfer<typeof loginUserSchema>>({
     resolver: zodResolver(loginUserSchema),
@@ -32,6 +34,7 @@ export default function LoginForm() {
   const handleSubmit = async (data: zodInfer<typeof loginUserSchema>) => {
     try {
       await auth?.loginWithEmailandPassword(data.email, data.password);
+      router.refresh();
     } catch (e) {
       toast("Error!!!", {
         description:
