@@ -43,7 +43,10 @@ export async function middleware(request: NextRequest) {
     );
   }
 
-  if (!decodedToken.admin) {
+  if (
+    !decodedToken.admin &&
+    request.nextUrl.pathname.startsWith("/admin-dashboard")
+  ) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
