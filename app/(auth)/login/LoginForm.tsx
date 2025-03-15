@@ -52,44 +52,49 @@ export default function LoginForm() {
         onSubmit={form.handleSubmit(handleSubmit)}
         className="flex flex-col gap-4"
       >
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => {
-            return (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="Email" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            );
-          }}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => {
-            return (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="Password" type="password" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            );
-          }}
-        />
-        <Button type="submit">Login</Button>
-        <div>
-          Forgot your password?
-          <Link href="/forgot-password" className="pl-2 underline">
-            Reset password
-          </Link>
-        </div>
-        <div className="text-center">or</div>
+        <fieldset
+          className="flex flex-col gap-4"
+          disabled={form.formState.isSubmitting}
+        >
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input {...field} placeholder="Email" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input {...field} placeholder="Password" type="password" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
+          />
+          <Button type="submit">Login</Button>
+          <div>
+            Forgot your password?
+            <Link href="/forgot-password" className="pl-2 underline">
+              Reset password
+            </Link>
+          </div>
+          <div className="text-center">or</div>
+        </fieldset>
       </form>
       <div className="mt-4">
         <ContinueWithGoogleButton />
