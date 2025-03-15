@@ -18,8 +18,10 @@ import { loginUserSchema } from "@/validation/loginSchema";
 import Link from "next/link";
 import { useAuth } from "@/context/auth";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
+  const router = useRouter();
   const auth = useAuth();
   const form = useForm<zodInfer<typeof loginUserSchema>>({
     resolver: zodResolver(loginUserSchema),
@@ -32,6 +34,7 @@ export default function LoginForm() {
   const handleSubmit = async (data: zodInfer<typeof loginUserSchema>) => {
     try {
       await auth?.loginWithEmailandPassword(data.email, data.password);
+      router.refresh();
     } catch (e) {
       toast("Error!!!", {
         description:
@@ -48,48 +51,50 @@ export default function LoginForm() {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(handleSubmit)}
-        className="flex flex-col gap-4"
-      >
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => {
-            return (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="Email" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            );
-          }}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => {
-            return (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="Password" type="password" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            );
-          }}
-        />
-        <Button type="submit">Login</Button>
-        <div>
-          Forgot your password?
-          <Link href="/forgot-password" className="pl-2 underline">
-            Reset password
-          </Link>
-        </div>
-        <div className="text-center">or</div>
+      <form onSubmit={form.handleSubmit(handleSubmit)}>
+        <fieldset
+          className="flex flex-col gap-4"
+          disabled={form.formState.isSubmitting}
+        >
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input {...field} placeholder="Email" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input {...field} placeholder="Password" type="password" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
+          />
+          <Button type="submit">Login</Button>
+          <div>
+            Forgot your password?
+            <Link href="/forgot-password" className="pl-2 underline">
+              Reset password
+            </Link>
+          </div>
+          <div className="text-center">or</div>
+        </fieldset>
       </form>
       <div className="mt-4">
         <ContinueWithGoogleButton />
