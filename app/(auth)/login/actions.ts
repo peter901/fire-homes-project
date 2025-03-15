@@ -1,13 +1,17 @@
 "use server";
 
-import { auth } from "@/firebase/server";
+import { auth } from "@/firebase/client";
 import { loginUserSchema } from "@/validation/loginSchema";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-export const loginUser = async (data: {
+export const loginUser = async ({
+  email,
+  password,
+}: {
   email: string;
   password: string;
 }) => {
-  const validation = loginUserSchema.safeParse(data);
+  const validation = loginUserSchema.safeParse({ email, password });
 
   if (!validation.success) {
     return {
@@ -17,15 +21,21 @@ export const loginUser = async (data: {
   }
 
   try {
-    await auth.createUser({
-      displayName: data.email,
-      email: data.email,
-      password: data.password,
-    });
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    return {
+      error: false,
+      user: userCredential.user,
+      message: "Login successful",
+    };
   } catch {
     return {
       error: true,
-      message: "Could not create user",
+      message: "Wrong email or password",
     };
   }
 };
