@@ -34,7 +34,7 @@ export default function LoginForm() {
   const handleSubmit = async (data: zodInfer<typeof loginUserSchema>) => {
     try {
       await auth?.loginWithEmailandPassword(data.email, data.password);
-      router.refresh();
+      router.push("/property-search")
     } catch (e) {
       toast("Error!!!", {
         description:

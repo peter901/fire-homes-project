@@ -12,7 +12,7 @@ export default function ContinueWithGoogleButton() {
       onClick={async () => {
         try {
           await auth?.loginWithGoogle();
-          router.refresh();
+          router.push("/property-search")
         } catch {}
       }}
       variant="outline"
