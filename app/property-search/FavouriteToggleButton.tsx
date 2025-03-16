@@ -23,12 +23,12 @@ export default function FavouriteToggleButton({
         if (!tokenResult) {
           return;
         }
-        if (!isFavourite) {
-          await addFavourite(propertyId, tokenResult.token);
-          toast("Success", { description: "Item added to favourites" });
-        } else {
+        if (isFavourite) {
           await removeFavourite(propertyId, tokenResult.token);
           toast("Success", { description: "Item removed from favourite" });
+        } else {
+          await addFavourite(propertyId, tokenResult.token);
+          toast("Added", { description: "Item added to favourites" });
         }
         router.refresh();
       }}
