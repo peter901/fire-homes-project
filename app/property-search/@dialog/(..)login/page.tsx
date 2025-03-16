@@ -1,6 +1,32 @@
+"use client";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogDescription,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { useRouter } from "next/navigation";
 
 export default function LoginDialog() {
+  const router = useRouter();
   return (
-    <div>LoginDialog</div>
-  )
+    <Dialog
+      open
+      onOpenChange={() => {
+        router.back();
+      }}
+    >
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Login</DialogTitle>
+          <DialogDescription>
+            You must be logged in to favourite a property
+          </DialogDescription>
+        </DialogHeader>
+        <div>Login form</div>
+      </DialogContent>
+    </Dialog>
+  );
 }
