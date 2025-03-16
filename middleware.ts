@@ -13,7 +13,8 @@ export async function middleware(request: NextRequest) {
   if (
     !token &&
     (request.nextUrl.pathname.startsWith("/login") ||
-      request.nextUrl.pathname.startsWith("/signup"))
+      request.nextUrl.pathname.startsWith("/signup") ||
+      request.nextUrl.pathname.startsWith("/property-search"))
   ) {
     return NextResponse.next();
   }
@@ -43,7 +44,10 @@ export async function middleware(request: NextRequest) {
     );
   }
 
-  if (!decodedToken.admin) {
+  if (
+    !decodedToken.admin &&
+    request.nextUrl.pathname.startsWith("/admin-dashboard")
+  ) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
@@ -51,5 +55,13 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin-dashboard", "/admin-dashboard/:path*", "/login", "/signup"],
+  matcher: [
+    "/admin-dashboard",
+    "/admin-dashboard/:path*",
+    "/login",
+    "/signup",
+    "/account",
+    "/account:path*",
+    "/property-search",
+  ],
 };
