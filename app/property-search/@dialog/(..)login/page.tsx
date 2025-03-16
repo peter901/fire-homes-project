@@ -11,6 +11,7 @@ import {
 import LoginForm from "@/components/ui/login-form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { loginSuccess } from "./actions";
 
 export default function LoginDialog() {
   const router = useRouter();
@@ -28,7 +29,12 @@ export default function LoginDialog() {
             You must be logged in to favourite a property
           </DialogDescription>
         </DialogHeader>
-        <LoginForm onSuccess={() => router.back()} />
+        <LoginForm
+          onSuccess={async () => {
+            await loginSuccess();
+            router.back();
+          }}
+        />
         <DialogFooter className="block">
           Do not have an account?
           <Link className="underline pl-2" href="/signup">
