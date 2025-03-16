@@ -7,6 +7,7 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog";
+import LoginForm from "@/components/ui/login-form";
 import { useRouter } from "next/navigation";
 
 export default function LoginDialog() {
@@ -25,7 +26,7 @@ export default function LoginDialog() {
             You must be logged in to favourite a property
           </DialogDescription>
         </DialogHeader>
-        <div>Login form</div>
+        <LoginForm onSuccess={() => router.back()} />
       </DialogContent>
     </Dialog>
   );
