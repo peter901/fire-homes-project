@@ -15,6 +15,7 @@ import { getPropertyById } from "@/data/properties";
 import { EyeIcon } from "lucide-react";
 import Link from "next/link";
 import RemoveFavouriteButton from "./RemoveFavouriteButton";
+import { redirect } from "next/navigation";
 
 export default async function Favourites({
   searchParams,
@@ -34,6 +35,10 @@ export default async function Favourites({
     (page - 1) * pageSize,
     page * pageSize
   );
+
+  if(!paginatedFavourites.length && page !== 1){
+    redirect(`/account/favourites?page=${totalPages}`)
+  }
 
   const properties = await Promise.all(
     paginatedFavourites.map(getPropertyById)
