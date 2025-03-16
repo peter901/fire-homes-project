@@ -24,3 +24,26 @@ export const addFavourite = async (propertyId: string, authToken: string) => {
       }
     );
 };
+
+export const removeFavourite = async (propertyId: string, authToken: string) => {
+    const verifiedToken = await auth.verifyIdToken(authToken);
+  
+    if (!verifiedToken) {
+      return {
+        error: true,
+        message: "Unauthorized",
+      };
+    }
+  
+    await firestore
+      .collection("favourites")
+      .doc(verifiedToken.uid)
+      .set(
+        {
+          [propertyId]: false,
+        },
+        {
+          merge: true,
+        }
+      );
+  };
