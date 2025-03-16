@@ -29,7 +29,7 @@ export default function LoginDialog() {
           </DialogDescription>
         </DialogHeader>
         <LoginForm onSuccess={() => router.back()} />
-        <DialogFooter>
+        <DialogFooter className="block">
           Do not have an account?
           <Link className="underline pl-2" href="/signup">
             Create one here
