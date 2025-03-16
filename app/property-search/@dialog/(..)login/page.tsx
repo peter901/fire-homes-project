@@ -6,8 +6,10 @@ import {
   DialogHeader,
   DialogDescription,
   DialogTitle,
+  DialogFooter,
 } from "@/components/ui/dialog";
 import LoginForm from "@/components/ui/login-form";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function LoginDialog() {
@@ -27,6 +29,12 @@ export default function LoginDialog() {
           </DialogDescription>
         </DialogHeader>
         <LoginForm onSuccess={() => router.back()} />
+        <DialogFooter>
+          Do not have an account?
+          <Link className="underline pl-2" href="/signup">
+            Create one here
+          </Link>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
