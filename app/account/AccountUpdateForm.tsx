@@ -50,11 +50,49 @@ export default function AccountUpdateForm() {
           render={({ field }) => {
             return (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>Current Password</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
                     placeholder="Current Password"
+                    type="password"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+        <FormField
+          control={form.control}
+          name="newPassword"
+          render={({ field }) => {
+            return (
+              <FormItem>
+                <FormLabel>New Password</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    placeholder="New Password"
+                    type="password"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+        <FormField
+          control={form.control}
+          name="newPasswordConfirm"
+          render={({ field }) => {
+            return (
+              <FormItem>
+                <FormLabel>New Confirm Password</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    placeholder="New Confirm Password"
                     type="password"
                   />
                 </FormControl>
