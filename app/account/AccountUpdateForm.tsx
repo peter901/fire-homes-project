@@ -43,7 +43,7 @@ export default function AccountUpdateForm() {
 
   return (
     <Form {...form}>
-      <fieldset>
+      <fieldset className="flex flex-col gap-4">
         <FormField
           control={form.control}
           name="currentPassword"
