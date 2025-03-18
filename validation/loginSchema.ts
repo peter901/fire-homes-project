@@ -2,5 +2,6 @@ import z from "zod";
 import { PasswordValidation } from "./passwordValidation";
 
 export const loginUserSchema = z.object({
-  email: PasswordValidation,
+  email: z.string().email(),
+  password: PasswordValidation,
 });
