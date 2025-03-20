@@ -47,7 +47,10 @@ export default function AccountUpdateForm() {
   };
 
   return (
-    <div>
+    <div className="pt-5 mt-5 border-t">
+      <h2 className="text-2xl font-bold pb-2">
+        Update Password
+      </h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)}>
           <fieldset
