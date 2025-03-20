@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -48,7 +49,7 @@ export default function AccountUpdateForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <fieldset className="flex flex-col gap-4">
+        <fieldset className="flex flex-col gap-4" disabled={form.formState.isSubmitting} >
           <FormField
             control={form.control}
             name="currentPassword"
@@ -106,6 +107,13 @@ export default function AccountUpdateForm() {
               );
             }}
           />
+          <Button
+            type="submit"
+            className="w-full flex gap-2"
+            disabled={form.formState.isSubmitting}
+          >
+            Update Password
+          </Button>
         </fieldset>
       </form>
     </Form>
