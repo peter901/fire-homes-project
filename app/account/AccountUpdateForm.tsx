@@ -10,8 +10,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "@/context/auth";
 import { PasswordValidation } from "@/validation/passwordValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { EmailAuthProvider, reauthenticateWithCredential, updatePassword } from "firebase/auth";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import type { infer as zodInfer } from "zod";
@@ -33,6 +35,7 @@ const formSchema = z
   });
 
 export default function AccountUpdateForm() {
+  const auth = useAuth();
   const form = useForm<zodInfer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,14 +46,26 @@ export default function AccountUpdateForm() {
   });
 
   const handleSubmit = async (data: zodInfer<typeof formSchema>) => {
-    console.log(data);
+    const user = auth?.currentUser;
+    if (!user?.email) {
+      return;
+    }
+
+    try {
+      await reauthenticateWithCredential(
+        user,
+        EmailAuthProvider.credential(user.email, data.currentPassword)
+      );
+
+      await updatePassword(user, data.newPassword);
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (
     <div className="pt-5 mt-5 border-t">
-      <h2 className="text-2xl font-bold pb-2">
-        Update Password
-      </h2>
+      <h2 className="text-2xl font-bold pb-2">Update Password</h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)}>
           <fieldset
