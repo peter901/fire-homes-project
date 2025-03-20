@@ -47,75 +47,80 @@ export default function AccountUpdateForm() {
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <fieldset className="flex flex-col gap-4" disabled={form.formState.isSubmitting} >
-          <FormField
-            control={form.control}
-            name="currentPassword"
-            render={({ field }) => {
-              return (
-                <FormItem>
-                  <FormLabel>Current Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="Current Password"
-                      type="password"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              );
-            }}
-          />
-          <FormField
-            control={form.control}
-            name="newPassword"
-            render={({ field }) => {
-              return (
-                <FormItem>
-                  <FormLabel>New Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="New Password"
-                      type="password"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              );
-            }}
-          />
-          <FormField
-            control={form.control}
-            name="newPasswordConfirm"
-            render={({ field }) => {
-              return (
-                <FormItem>
-                  <FormLabel>New Confirm Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="New Confirm Password"
-                      type="password"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              );
-            }}
-          />
-          <Button
-            type="submit"
-            className="w-full flex gap-2"
+    <div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(handleSubmit)}>
+          <fieldset
+            className="flex flex-col gap-4"
             disabled={form.formState.isSubmitting}
           >
-            Update Password
-          </Button>
-        </fieldset>
-      </form>
-    </Form>
+            <FormField
+              control={form.control}
+              name="currentPassword"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel>Current Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Current Password"
+                        type="password"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
+            <FormField
+              control={form.control}
+              name="newPassword"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel>New Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="New Password"
+                        type="password"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
+            <FormField
+              control={form.control}
+              name="newPasswordConfirm"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel>New Confirm Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="New Confirm Password"
+                        type="password"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
+            <Button
+              type="submit"
+              className="w-full flex gap-2"
+              disabled={form.formState.isSubmitting}
+            >
+              Update Password
+            </Button>
+          </fieldset>
+        </form>
+      </Form>
+    </div>
   );
 }
