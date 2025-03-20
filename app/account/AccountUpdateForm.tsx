@@ -15,6 +15,7 @@ import { PasswordValidation } from "@/validation/passwordValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EmailAuthProvider, reauthenticateWithCredential, updatePassword } from "firebase/auth";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 import type { infer as zodInfer } from "zod";
 
@@ -59,7 +60,12 @@ export default function AccountUpdateForm() {
 
       await updatePassword(user, data.newPassword);
     } catch (error) {
-      console.log(error)
+      if (error instanceof Error && 'code' in error) {
+        const title = error.code === "auth/invalid-credential" ? "Your password is incorrect": "An error occured";
+        toast(title);
+      } else {
+        toast("An unexpected error occurred");
+      }
     }
   };
 
