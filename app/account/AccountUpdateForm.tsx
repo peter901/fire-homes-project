@@ -59,6 +59,7 @@ export default function AccountUpdateForm() {
       );
 
       await updatePassword(user, data.newPassword);
+      toast("Password updated successfully...!")
     } catch (error) {
       if (error instanceof Error && 'code' in error) {
         const title = error.code === "auth/invalid-credential" ? "Your password is incorrect": "An error occured";
