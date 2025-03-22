@@ -10,19 +10,23 @@ export async function middleware(request: NextRequest) {
   const cookieStore = await cookies();
   const token = cookieStore.get("firebaseAuthToken")?.value;
 
+  const {pathname} = request.nextUrl;
+
   if (
     !token &&
-    (request.nextUrl.pathname.startsWith("/login") ||
-      request.nextUrl.pathname.startsWith("/signup") ||
-      request.nextUrl.pathname.startsWith("/property-search"))
+    (pathname.startsWith("/login") ||
+      pathname.startsWith("/signup") ||
+      pathname.startsWith("/property-search")||
+      pathname.startsWith("/forgot-password"))
   ) {
     return NextResponse.next();
   }
 
   if (
     token &&
-    (request.nextUrl.pathname.startsWith("/login") ||
-      request.nextUrl.pathname.startsWith("/signup"))
+    (pathname.startsWith("/login") ||
+    pathname.startsWith("/signup")||
+    pathname.startsWith("/forgot-password"))
   ) {
     return NextResponse.redirect(new URL("/", request.url));
   }
@@ -37,7 +41,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(
       new URL(
         `/api/refresh-token?redirect=${encodeURIComponent(
-          request.nextUrl.pathname
+          pathname
         )}`,
         request.url
       )
@@ -46,7 +50,7 @@ export async function middleware(request: NextRequest) {
 
   if (
     !decodedToken.admin &&
-    request.nextUrl.pathname.startsWith("/admin-dashboard")
+    pathname.startsWith("/admin-dashboard")
   ) {
     return NextResponse.redirect(new URL("/", request.url));
   }
@@ -60,6 +64,7 @@ export const config = {
     "/admin-dashboard/:path*",
     "/login",
     "/signup",
+    "/forgot-password",
     "/account",
     "/account:path*",
     "/property-search",
