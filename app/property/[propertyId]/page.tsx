@@ -14,6 +14,8 @@ import ReactMarkDown from "react-markdown";
 import BackButton from "./BackButton";
 import imageUrlFormatter from "@/lib/imageUrlFormatter";
 
+export const dynamic = "force-static";
+
 export default async function PropertyPage({
   params,
 }: {
@@ -57,7 +59,7 @@ export default async function PropertyPage({
         )}
 
         <div className="property-descrition max-w-screen-md mx-auto py-10 px-4">
-          <BackButton /> 
+          <BackButton />
           <ReactMarkDown>{property.description}</ReactMarkDown>
         </div>
       </div>

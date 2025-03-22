@@ -3,6 +3,7 @@
 import type { Property } from "@/types/property";
 import { auth, firestore } from "@/firebase/server";
 import { propertyDataSchema } from "@/validation/propertySchema";
+import { revalidatePath } from "next/cache";
 
 export const updateProperty = async (data: Property, authToken: string) => {
   const { id, ...propertyData } = data;
@@ -28,4 +29,6 @@ export const updateProperty = async (data: Property, authToken: string) => {
     .collection("properties")
     .doc(id)
     .update({ ...propertyData, updated: new Date() });
+
+  revalidatePath(`/property/${id}`);
 };
